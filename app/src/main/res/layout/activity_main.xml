@@ -4,160 +4,214 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#006592"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:weightSum="3">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <TextView
-            android:id="@+id/cityName"
+            android:id="@+id/currentCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="City Name"
+            android:textColor="#FDFDFD"
             android:textSize="30sp"
             android:textStyle="bold" />
+
         <TextView
-            android:id="@+id/tempNow"
+            android:id="@+id/currentTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="22°C"
-            android:textSize="40sp"/>
+            android:textColor="#FFFFFF"
+            android:textSize="80sp" />
 
         <ImageView
-            android:id="@+id/weatherEmoji"
+            android:id="@+id/currentSymbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/btn_star" />
+            android:background="@drawable/icon_01d"
+            android:contentDescription="current weather symbol" />
+
         <TextView
-            android:id="@+id/emojiText"
+            android:id="@+id/currentDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="broken clouds"
-            android:textSize="20sp"/>
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/weatherTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#808080"
-            android:textSize="18sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Weather Now..." />
+
         <GridLayout
             android:id="@+id/gridLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:columnCount="2"
             android:rowCount="2"
-            android:layout_marginTop="16dp">
+
+            >
             <!--Grid Top left-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="O"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="8dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Min Temp"
-                    android:textSize="14sp" />
+                    android:background="@drawable/circle_outline"
+                    android:padding="20dp"
+                    app:srcCompat="@drawable/temp" />
 
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Min Temp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/currentMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="----"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
             <!--Grid Top Right-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="O"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="8dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity"
-                    android:textSize="14sp" />
+                    android:background="@drawable/circle_outline"
+                    android:padding="25dp"
+                    app:srcCompat="@drawable/humidity" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Humidity"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/currentHumidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="----"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
             </LinearLayout>
             <!--Grid Bottom Left-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="O"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="8dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max Temp"
-                    android:textSize="14sp" />
+                    android:background="@drawable/circle_outline"
+                    android:padding="20dp"
+                    app:srcCompat="@drawable/temp" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Max Temp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/currentMax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="----"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
             </LinearLayout>
             <!--Grid Bottom Right-->
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1">
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="O"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="8dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sunset?"
-                    android:textSize="14sp" />
+                    android:background="@drawable/circle_outline"
+                    android:padding="30dp"
+                    app:srcCompat="@drawable/wind" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wind Speed"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/currentWind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="----"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
             </LinearLayout>
         </GridLayout>
+
     </LinearLayout>
 
 
