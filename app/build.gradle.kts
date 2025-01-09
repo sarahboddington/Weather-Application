@@ -1,7 +1,11 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
+
+val myApiKeyVar = gradleLocalProperties(rootDir, providers).getProperty("myApiKey", "")
 
 android {
     namespace = "com.example.weatherapplication"
@@ -14,6 +18,12 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue(
+            "string",
+            "myApiKey",
+            "\"" + myApiKeyVar + "\""
+        )
     }
 
     buildTypes {
@@ -49,3 +59,4 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
 }
+

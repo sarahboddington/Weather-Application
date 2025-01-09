@@ -22,8 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var windTextView: TextView
     private lateinit var currentSymbol: ImageView
     private lateinit var searchBar: SearchView
-
-    private val apiKey = "API_KEY" //My Api Key - Update to users key
+    private var apiKey = "" //My Api Key - Update to users key
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +35,14 @@ class MainActivity : AppCompatActivity() {
         humidityTextView = findViewById(R.id.currentHumidity)
         windTextView = findViewById(R.id.currentWind)
         currentSymbol = findViewById(R.id.currentSymbol)
+
+        // Fetch API key stored in local properties
+        apiKey = getString(R.string.myApiKey)
+
         // Run method to fetch and update ui to reflect current weather in a city
         getWeatherData("Wellington")
+
+        // Set up search bar and listener
         setupSearchBar()
     }
 
