@@ -21,12 +21,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var windTextView: TextView
     private lateinit var currentSymbol: ImageView
 
-    private val apiKey = "b72404d39e788f238613f622dfddb33a" //My Api Key - Update to users key
+    private val apiKey = "2a5ac747a9ba6b1731794920819dd9dd" //My Api Key - Update to users key
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         cityTextView = findViewById(R.id.currentCity)
         tempTextView = findViewById(R.id.currentTemp)
         descriptionTextView = findViewById(R.id.currentDescription)
@@ -35,20 +34,16 @@ class MainActivity : AppCompatActivity() {
         humidityTextView = findViewById(R.id.currentHumidity)
         windTextView = findViewById(R.id.currentWind)
         currentSymbol = findViewById(R.id.currentSymbol)
-
-
         // Run method to fetch and update ui to reflect current weather in a city
-        getWeatherData("Nelson")
+        getWeatherData("Wellington")
     }
 
     private fun getWeatherData(cityName: String) {
         // Retrofit instance for converting
         val retrofit = ApiClient.retrofit
         val service = retrofit.create(WeatherApiService::class.java)
-
         // Make API call to OpenWeather
         val call = service.getWeather(cityName, apiKey, "metric")
-
         call.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                 if (response.isSuccessful) {
@@ -93,10 +88,6 @@ class MainActivity : AppCompatActivity() {
                     }
                     val drawable = ContextCompat.getDrawable(this@MainActivity, symbolID)
                     currentSymbol.background = drawable
-
-
-
-
                 } else {
                     Toast.makeText(this@MainActivity, "Failed to retrieve weather", Toast.LENGTH_SHORT).show()
                 }
