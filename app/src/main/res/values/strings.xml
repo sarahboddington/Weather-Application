@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Weather Application</string>
+    <string name="city_name">City Name</string>
+    <string name="_22_c">22°C</string>
+    <string name="current_weather_symbol">current weather symbol</string>
+    <string name="broken_clouds">broken clouds</string>
+    <string name="minimum_temperature_icon">Minimum temperature icon</string>
+    <string name="min_temp">Min Temp</string>
+    <string name="data_blank">----</string>
+    <string name="humidity_icon">Humidity icon</string>
+    <string name="humidity">Humidity</string>
+    <string name="maximum_temperature_icon">Maximum temperature icon</string>
+    <string name="max_temp">Max Temp</string>
+    <string name="wind_speed_icon">Wind speed icon</string>
+    <string name="wind_speed">Wind Speed</string>
 </resources>

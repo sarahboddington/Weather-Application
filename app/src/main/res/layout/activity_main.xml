@@ -2,9 +2,10 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#006592"
+    android:background="@drawable/backgroundgradient"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -19,13 +20,15 @@
             android:queryHint="Search for a city...."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/search_bar" />
+            android:background="@drawable/search_bar"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <TextView
             android:id="@+id/currentCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="City Name"
+            android:text="@string/city_name"
             android:textColor="#FDFDFD"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -35,7 +38,7 @@
             android:id="@+id/currentTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22°C"
+            android:text="@string/_22_c"
             android:textColor="#FFFFFF"
             android:textSize="80sp" />
 
@@ -44,13 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/icon_01d"
-            android:contentDescription="current weather symbol" />
+            android:contentDescription="@string/current_weather_symbol" />
 
         <TextView
             android:id="@+id/currentDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="broken clouds"
+            android:text="@string/broken_clouds"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -72,8 +75,7 @@
             android:layout_margin="10dp"
             android:columnCount="2"
             android:rowCount="2"
-
-            >
+            tools:ignore="UselessParent">
             <!--Grid Top left-->
             <LinearLayout
                 android:layout_width="0dp"
@@ -84,9 +86,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
+                    android:contentDescription="@string/minimum_temperature_icon"
                     android:padding="20dp"
                     app:srcCompat="@drawable/temp"
                     />
@@ -101,14 +104,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Min Temp"
+                        android:text="@string/min_temp"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/currentMin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="----"
+                        android:text="@string/data_blank"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -122,9 +125,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
+                    android:contentDescription="@string/humidity_icon"
                     android:padding="25dp"
                     app:srcCompat="@drawable/humidity" />
 
@@ -138,14 +142,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Humidity"
+                        android:text="@string/humidity"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/currentHumidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="----"
+                        android:text="@string/data_blank"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -159,9 +163,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
+                    android:contentDescription="@string/maximum_temperature_icon"
                     android:padding="20dp"
                     app:srcCompat="@drawable/temp" />
 
@@ -175,14 +180,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Max Temp"
+                        android:text="@string/max_temp"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/currentMax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="----"
+                        android:text="@string/data_blank"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -196,9 +201,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
+                    android:contentDescription="@string/wind_speed_icon"
                     android:padding="30dp"
                     app:srcCompat="@drawable/wind" />
 
@@ -212,14 +218,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Wind Speed"
+                        android:text="@string/wind_speed"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/currentWind"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="----"
+                        android:text="@string/data_blank"
                         android:textSize="14sp" />
                 </LinearLayout>
 

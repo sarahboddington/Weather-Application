@@ -1,9 +1,7 @@
 package com.example.weatherapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -24,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var windTextView: TextView
     private lateinit var currentSymbol: ImageView
     private lateinit var searchBar: SearchView
-    private lateinit var citiesLV: ListView
 
     private val apiKey = "2a5ac747a9ba6b1731794920819dd9dd" //My Api Key - Update to users key
 
@@ -51,16 +48,34 @@ class MainActivity : AppCompatActivity() {
         // Make API call to OpenWeather
         val call = service.getWeather(cityName, apiKey, "metric")
         call.enqueue(object : Callback<WeatherResponse> {
-            override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
+            override fun onResponse(
+                call: Call<WeatherResponse>,
+                response: Response<WeatherResponse>
+            ) {
                 if (response.isSuccessful) {
                     val weatherResponse = response.body()
-                    cityTextView.text = cityName.replaceFirstChar { cityName[0].uppercase() }
-                    tempTextView.text ="${weatherResponse?.main?.temp}°C "
+                    cityTextView.text = "${weatherResponse?.name}"
+                    tempTextView.text = buildString {
+                        append(weatherResponse?.main?.temp)
+                        append("°C ")
+                    }
                     descriptionTextView.text = "${weatherResponse?.weather?.get(0)?.description}"
-                    minTextView.text = "${weatherResponse?.main?.temp_min}°C"
-                    maxTextView.text = "${weatherResponse?.main?.temp_max}°C"
-                    humidityTextView.text = "${weatherResponse?.main?.humidity}%"
-                    windTextView.text = "${weatherResponse?.wind?.speed}km/hr"
+                    minTextView.text = buildString {
+                        append(weatherResponse?.main?.temp_min)
+                        append("°C")
+                    }
+                    maxTextView.text = buildString {
+                        append(weatherResponse?.main?.temp_max)
+                        append("°C")
+                    }
+                    humidityTextView.text = buildString {
+                        append(weatherResponse?.main?.humidity)
+                        append("%")
+                    }
+                    windTextView.text = buildString {
+                        append(weatherResponse?.wind?.speed)
+                        append(" m/s")
+                    }
                     val symbolString = "${weatherResponse?.weather?.get(0)?.icon}"
                     val symbolID = when (symbolString) {
                         "01d" -> R.drawable.icon_01d
@@ -86,7 +101,11 @@ class MainActivity : AppCompatActivity() {
                     val drawable = ContextCompat.getDrawable(this@MainActivity, symbolID)
                     currentSymbol.background = drawable
                 } else {
-                    Toast.makeText(this@MainActivity, "Failed to retrieve weather", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Failed to retrieve weather",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -98,10 +117,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSearchBar() {
         searchBar = findViewById(R.id.searchField)
-        if (searchBar == null) {
-            Log.e("SearchView", "SearchView is null!")
-            return
-        }
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
@@ -109,6 +124,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
