@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentSymbol: ImageView
     private lateinit var searchBar: SearchView
 
-    private val apiKey = "2a5ac747a9ba6b1731794920819dd9dd" //My Api Key - Update to users key
+    private val apiKey = "API_KEY" //My Api Key - Update to users key
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
