@@ -1,7 +1,10 @@
 package com.example.weatherapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
+import android.widget.ListView
+import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var humidityTextView: TextView
     private lateinit var windTextView: TextView
     private lateinit var currentSymbol: ImageView
+    private lateinit var searchBar: SearchView
+    private lateinit var citiesLV: ListView
 
     private val apiKey = "2a5ac747a9ba6b1731794920819dd9dd" //My Api Key - Update to users key
 
@@ -36,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         currentSymbol = findViewById(R.id.currentSymbol)
         // Run method to fetch and update ui to reflect current weather in a city
         getWeatherData("Wellington")
+        setupSearchBar()
     }
 
     private fun getWeatherData(cityName: String) {
@@ -48,22 +54,13 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                 if (response.isSuccessful) {
                     val weatherResponse = response.body()
-                    val weatherInfo = """
-                        City: ${weatherResponse?.name}
-                        Temperature: ${weatherResponse?.main?.temp}°C
-                        Humidity: ${weatherResponse?.main?.humidity}%
-                        Description: ${weatherResponse?.weather?.get(0)?.description}
-                        Feels Like: ${weatherResponse?.main?.feels_like}°C
-                        Min Temp: ${weatherResponse?.main?.temp_min}°C
-                        Max Temp: ${weatherResponse?.main?.temp_max}°C
-                    """
-                    cityTextView.text = cityName
+                    cityTextView.text = cityName.replaceFirstChar { cityName[0].uppercase() }
                     tempTextView.text ="${weatherResponse?.main?.temp}°C "
                     descriptionTextView.text = "${weatherResponse?.weather?.get(0)?.description}"
                     minTextView.text = "${weatherResponse?.main?.temp_min}°C"
                     maxTextView.text = "${weatherResponse?.main?.temp_max}°C"
                     humidityTextView.text = "${weatherResponse?.main?.humidity}%"
-                    windTextView.text = "${weatherResponse?.weather?.get(0)?.icon}"
+                    windTextView.text = "${weatherResponse?.wind?.speed}km/hr"
                     val symbolString = "${weatherResponse?.weather?.get(0)?.icon}"
                     val symbolID = when (symbolString) {
                         "01d" -> R.drawable.icon_01d
@@ -98,4 +95,24 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun setupSearchBar() {
+        searchBar = findViewById(R.id.searchField)
+        if (searchBar == null) {
+            Log.e("SearchView", "SearchView is null!")
+            return
+        }
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    getWeatherData(it)
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+    }
+
 }
