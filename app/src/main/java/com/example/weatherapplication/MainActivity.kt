@@ -27,6 +27,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initialiseViews()
+
+        // Fetch API key stored in local properties
+        apiKey = getString(R.string.myApiKey)
+
+        // Run method to fetch and update ui to reflect current weather in default city (Wellington)
+        getWeatherData("Wellington")
+
+        getWeatherForcast("Wellington")
+
+        // Set up search bar and listener
+        setupSearchBar()
+    }
+
+    private fun initialiseViews() {
         cityTextView = findViewById(R.id.currentCity)
         tempTextView = findViewById(R.id.currentTemp)
         descriptionTextView = findViewById(R.id.currentDescription)
@@ -35,15 +50,6 @@ class MainActivity : AppCompatActivity() {
         humidityTextView = findViewById(R.id.currentHumidity)
         windTextView = findViewById(R.id.currentWind)
         currentSymbol = findViewById(R.id.currentSymbol)
-
-        // Fetch API key stored in local properties
-        apiKey = getString(R.string.myApiKey)
-
-        // Run method to fetch and update ui to reflect current weather in a city
-        getWeatherData("Wellington")
-
-        // Set up search bar and listener
-        setupSearchBar()
     }
 
     private fun getWeatherData(cityName: String) {
@@ -115,9 +121,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun getWeatherForcast(cityName: String) {
+
     }
 
     private fun setupSearchBar() {
