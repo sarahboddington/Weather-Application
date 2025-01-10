@@ -13,4 +13,6 @@
     <string name="max_temp">Max Temp</string>
     <string name="wind_speed_icon">Wind speed icon</string>
     <string name="wind_speed">Wind Speed</string>
+    <string name="celsius">°C</string>
+    <string name="fahren">°F</string>
 </resources>

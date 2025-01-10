@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,76 +9,68 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <SearchView
-        android:id="@+id/searchField"
+    <Button
+        android:id="@+id/weatherButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/search_bar"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:queryHint="Search for a city...." />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/convertSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:textColorHint="@color/dark_blue"
-        android:textOff="@string/celsius"
-        android:textOn="@string/fahren"
-        app:showText="true"
-        app:thumbTint="@color/purple"
-        app:trackTint="#FFFFFF" />
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/dark_grey"
+        android:text="Back to dashboard" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center|top"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="top|center"
+        android:paddingTop="25dp">
 
 
         <TextView
-            android:id="@+id/currentCity"
+            android:id="@+id/currentCityTidal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/city_name"
             android:textColor="#FDFDFD"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
 
         <TextView
-            android:id="@+id/currentTemp"
+            android:id="@+id/currentTempTidal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_22_c"
             android:textColor="#FFFFFF"
             android:textSize="80sp" />
 
-
         <TextView
-            android:id="@+id/feelslikeTemp"
+            android:id="@+id/feelslikeTempTidal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_22_c"
             android:textColor="#6EFFFFFF"
             android:textSize="20sp" />
 
-
         <ImageView
-            android:id="@+id/currentSymbol"
+            android:id="@+id/currentSymbolTidal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/icon_01d"
             android:contentDescription="@string/current_weather_symbol" />
 
         <TextView
-            android:id="@+id/currentDescription"
+            android:id="@+id/currentDescriptionTidal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/broken_clouds"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
+
+
 
 
     </LinearLayout>
@@ -93,7 +84,7 @@
 
 
         <GridLayout
-            android:id="@+id/gridLayout"
+            android:id="@+id/gridLayoutTidal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -113,9 +104,10 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
-                    android:contentDescription="@string/minimum_temperature_icon"
+                    android:contentDescription="Water temprature icon"
                     android:padding="20dp"
-                    app:srcCompat="@drawable/temp" />
+                    app:srcCompat="@drawable/temp"
+                    />
 
                 <LinearLayout
                     android:layout_width="100dp"
@@ -127,11 +119,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/min_temp"
+                        android:text="Water temp"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/currentMin"
+                        android:id="@+id/currentWaterTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/data_blank"
@@ -150,9 +142,9 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
-                    android:contentDescription="@string/maximum_temperature_icon"
+                    android:contentDescription="Sea level icon"
                     android:padding="20dp"
-                    app:srcCompat="@drawable/temp" />
+                    app:srcCompat="@drawable/sea_level_symbol" />
 
                 <LinearLayout
                     android:layout_width="100dp"
@@ -164,11 +156,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/max_temp"
+                        android:text="Sea level"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/currentMax"
+                        android:id="@+id/seaLevel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/data_blank"
@@ -188,9 +180,9 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
-                    android:contentDescription="@string/humidity_icon"
+                    android:contentDescription="Low tide icon"
                     android:padding="25dp"
-                    app:srcCompat="@drawable/humidity" />
+                    app:srcCompat="@drawable/low_tide_symbol" />
 
                 <LinearLayout
                     android:layout_width="100dp"
@@ -202,11 +194,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/humidity"
+                        android:text="Next low tide"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/currentHumidity"
+                        android:id="@+id/nextLow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/data_blank"
@@ -226,9 +218,9 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/circle_outline"
-                    android:contentDescription="@string/wind_speed_icon"
+                    android:contentDescription="High tide icon"
                     android:padding="30dp"
-                    app:srcCompat="@drawable/wind" />
+                    app:srcCompat="@drawable/high_tide_symbol" />
 
                 <LinearLayout
                     android:layout_width="100dp"
@@ -240,11 +232,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/wind_speed"
+                        android:text="Next high tide"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/currentWind"
+                        android:id="@+id/nextHigh"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/data_blank"
@@ -254,17 +246,6 @@
             </LinearLayout>
 
         </GridLayout>
-
-
-        <Button
-            android:id="@+id/tidalButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/purple"
-            android:text="Tidal information" />
 
 
     </LinearLayout>

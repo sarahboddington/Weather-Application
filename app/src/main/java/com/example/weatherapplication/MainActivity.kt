@@ -1,7 +1,9 @@
 package com.example.weatherapplication
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var cityTextView: TextView
     private lateinit var tempTextView: TextView
+    private lateinit var feelslikeTextView: TextView
     private lateinit var descriptionTextView: TextView
     private lateinit var minTextView: TextView
     private lateinit var maxTextView: TextView
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentSymbol: ImageView
     private lateinit var searchBar: SearchView
     private var apiKey = "" //My Api Key - Update to users key
+
+    private lateinit var mainLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +40,25 @@ class MainActivity : AppCompatActivity() {
         // Run method to fetch and update ui to reflect current weather in default city (Wellington)
         getWeatherData("Wellington")
 
-        getWeatherForcast("Wellington")
-
         // Set up search bar and listener
         setupSearchBar()
+
+        // Set up navigation functionality between tidal/weather layouts
+        setupTidalLayout()
+
     }
 
     private fun initialiseViews() {
         cityTextView = findViewById(R.id.currentCity)
         tempTextView = findViewById(R.id.currentTemp)
+        feelslikeTextView = findViewById(R.id.feelslikeTemp)
         descriptionTextView = findViewById(R.id.currentDescription)
         minTextView = findViewById(R.id.currentMin)
         maxTextView = findViewById(R.id.currentMax)
         humidityTextView = findViewById(R.id.currentHumidity)
         windTextView = findViewById(R.id.currentWind)
         currentSymbol = findViewById(R.id.currentSymbol)
+        mainLayout = findViewById(R.id.mainLayout)
     }
 
     private fun getWeatherData(cityName: String) {
@@ -67,16 +76,21 @@ class MainActivity : AppCompatActivity() {
                     val weatherResponse = response.body()
                     cityTextView.text = "${weatherResponse?.name}"
                     tempTextView.text = buildString {
-                        append(weatherResponse?.main?.temp)
+                        weatherResponse?.main?.temp?.let { append(it.toInt()) }
+                        append("°C ")
+                    }
+                    feelslikeTextView.text = buildString {
+                        append("feels like ")
+                        weatherResponse?.main?.feels_like?.let { append(it.toInt()) }
                         append("°C ")
                     }
                     descriptionTextView.text = "${weatherResponse?.weather?.get(0)?.description}"
                     minTextView.text = buildString {
-                        append(weatherResponse?.main?.temp_min)
+                        weatherResponse?.main?.temp_min?.let { append(it.toInt()) }
                         append("°C")
                     }
                     maxTextView.text = buildString {
-                        append(weatherResponse?.main?.temp_max)
+                        weatherResponse?.main?.temp_max?.let { append(it.toInt()) }
                         append("°C")
                     }
                     humidityTextView.text = buildString {
@@ -109,6 +123,11 @@ class MainActivity : AppCompatActivity() {
                         "50n" -> R.drawable.icon_50n
                         else -> R.drawable.icon_default
                     }
+
+                    if (symbolString.contains('d')) {
+                       mainLayout.background = ContextCompat.getDrawable(this@MainActivity, R.drawable.day_backgroundgradient)
+                    }
+
                     val drawable = ContextCompat.getDrawable(this@MainActivity, symbolID)
                     currentSymbol.background = drawable
                 } else {
@@ -126,10 +145,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun getWeatherForcast(cityName: String) {
-
-    }
-
     private fun setupSearchBar() {
         searchBar = findViewById(R.id.searchField)
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -144,6 +159,31 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+    }
+
+    private fun setupTidalLayout(){
+        findViewById<View>(R.id.tidalButton).setOnClickListener((View.OnClickListener { view: View? ->
+            setContentView(R.layout.activity_tidal)
+            findViewById<View>(R.id.weatherButton).setOnClickListener((View.OnClickListener { view: View? ->
+                showWeatherLayout()
+            }))
+        }))
+    }
+
+    private fun showTidalLayout() {
+        setContentView(R.layout.activity_tidal)
+        findViewById<View>(R.id.weatherButton).setOnClickListener((View.OnClickListener { view: View? ->
+            showWeatherLayout()
+        }))
+    }
+
+    private fun showWeatherLayout() {
+        setContentView(R.layout.activity_main)
+        initialiseViews()
+        getWeatherData("Wellington")
+        findViewById<View>(R.id.tidalButton).setOnClickListener((View.OnClickListener { view: View? ->
+            showTidalLayout()
+        }))
     }
 
 }
