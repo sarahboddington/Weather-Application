@@ -138,7 +138,6 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
             }
